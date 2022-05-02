@@ -1,0 +1,14 @@
+version: "3"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=12d'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ../../data/prometheus:/prometheus
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 9090:9090

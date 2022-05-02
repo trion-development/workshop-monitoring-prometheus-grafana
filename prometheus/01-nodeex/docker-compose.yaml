@@ -1,0 +1,33 @@
+version: "3"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=12d'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ../../data/prometheus:/prometheus
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 9090:9090
+
+
+  node_exporter:
+    image: quay.io/prometheus/node-exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/host/rootfs:ro,rslave
+    command:
+      - '--path.procfs'
+      - '/host/proc'
+      - '--path.sysfs'
+      - '/host/sys'
+      - '--path.rootfs'
+      - '/host/rootfs'
+      - '--collector.filesystem.ignored-mount-points'
+      - '"^/(sys|proc|dev|host|etc)($$|/)"'
+      - '--web.listen-address=0.0.0.0:9100'
+    network_mode: host

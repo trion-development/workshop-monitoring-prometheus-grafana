@@ -1,0 +1,15 @@
+### register
+GET http://localhost:8080/account/register
+Accept: application/json
+
+### login
+GET http://localhost:8080/login
+Accept: application/json
+
+### shop
+GET http://localhost:8080/shop
+Accept: application/json
+
+### search
+GET http://localhost:8080/search
+Accept: application/json
