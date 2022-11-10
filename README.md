@@ -18,6 +18,7 @@ Grafana Download: https://grafana.com/grafana/download
 ## Einrichtung
 
 Linux:
+`mkdir data & mkdir data/prometheus & mkdir data/grafana`
 `chmod -R a+w data`
 
 ## Beispiele
