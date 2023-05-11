@@ -2,6 +2,7 @@ package dev.trion.training.app.web;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,8 +45,9 @@ public class AccountController
     }
 
     @ExceptionHandler
-    public String handleDuplicate(DuplicateUserException ex)
+    public String handleDuplicate(HttpServletRequest r, DuplicateUserException e)
     {
+        // r.setAttribute(RequestDispatcher.ERROR_EXCEPTION, e);
         failCounter.increment();
         return duplicate;
     }

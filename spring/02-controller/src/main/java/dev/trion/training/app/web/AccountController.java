@@ -1,5 +1,7 @@
 package dev.trion.training.app.web;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,10 @@ public class AccountController
     }
 
     @ExceptionHandler
-    public String handleDuplicate(DuplicateUserException ex)
+    public String handleDuplicate(HttpServletRequest r, DuplicateUserException e)
     {
+        //r.setAttribute(RequestDispatcher.ERROR_EXCEPTION, e);
         return duplicate;
     }
+
 }
